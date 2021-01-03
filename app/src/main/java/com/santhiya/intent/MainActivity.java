@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    Button map,mail,url;
+    Button map,mail,url,image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         map=findViewById(R.id.mapbtn);
         mail=findViewById(R.id.mailbtn);
         url=findViewById(R.id.urlbtn);
+        image=findViewById(R.id.imagebtn);
 
 
 
@@ -52,6 +53,18 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent=new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("market://details?id=com.whatsap"));
                 Intent chooser=Intent.createChooser(intent,"Launch market");
+                startActivity(chooser);
+            }
+        });
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri imguri=Uri.parse("android.resource://com.santhiya.intent/drawable/"+R.drawable.ic_launcher_foreground);
+                Intent intent=new Intent(Intent.ACTION_SEND);
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_STREAM,imguri);
+                Intent chooser=Intent.createChooser(intent,"send Image");
                 startActivity(chooser);
             }
         });
